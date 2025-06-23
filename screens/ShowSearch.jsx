@@ -1,25 +1,22 @@
-import React, { useState, useEffect } from "react";
 import {
-  View,
   Text,
+  View,
   TextInput,
   FlatList,
   ActivityIndicator,
   TouchableOpacity,
 } from "react-native";
-import { useNavigation } from "@react-navigation/native";
+import { useState, useEffect } from "react";
 import debounce from "lodash.debounce";
-
-import useSearchMovies from "../firebase/useSearchMovies";
-
-import ListItemCard from "../components/ListItemCard";
-import CustomHeader from "../components/CustomHeader";
-
-import { Ionicons } from "@expo/vector-icons";
-import createStyles from "../styles/Search.styles";
+import { useNavigation } from "@react-navigation/native";
 import { useTheme } from "../styles/ThemeContext";
+import createStyles from "../styles/ShowsHome.styles";
+import { Ionicons } from "@expo/vector-icons";
+import CustomHeader from "../components/CustomHeader";
+import useSearchShows from "../firebase/useSearchShows";
+import ListItemCardShows from "../components/ListItemCardShows";
 
-const Search = () => {
+const ShowSearch = () => {
   const theme = useTheme();
   const styles = createStyles(theme);
   const navigation = useNavigation();
@@ -27,12 +24,11 @@ const Search = () => {
   const [query, setQuery] = useState("");
   const [debouncedQuery, setDebouncedQuery] = useState("");
 
-  // Debounce the search input to prevent excessive queries
   const debouncedSetQuery = debounce((text) => {
     setDebouncedQuery(text);
   }, 300);
 
-  const { movies, loading, error } = useSearchMovies(debouncedQuery);
+  const { shows, loading, error } = useSearchShows(debouncedQuery);
 
   useEffect(() => {
     debouncedSetQuery(query);
@@ -41,7 +37,6 @@ const Search = () => {
     };
   }, [query]);
 
-  // Define the Header Component
   const renderHeader = () => (
     <View style={styles.searchHeader}>
       <View style={styles.searchInputContainer}>
@@ -53,7 +48,7 @@ const Search = () => {
         />
         <TextInput
           style={styles.searchInput}
-          placeholder="Search for a Movie"
+          placeholder="Search for a Show"
           placeholderTextColor={theme.colors.placeholderText}
           value={query}
           onChangeText={setQuery}
@@ -80,19 +75,18 @@ const Search = () => {
 
   return (
     <View style={styles.container}>
-      {/* Custom Header */}
-      <CustomHeader title="Search Movies" navigation={navigation} />
+      <CustomHeader title={"Search Shows"} />
       {/* Search Bar */}
       {renderHeader()}
-
+      {/* Results */}
       {/* Search Results */}
       <FlatList
-        data={movies}
+        data={shows}
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
-          <ListItemCard
+          <ListItemCardShows
             action={() =>
-              navigation.navigate("MovieDetails", { movieId: item.id })
+              navigation.navigate("ShowDetails", { showId: item.id })
             }
             item={item}
             styles={styles}
@@ -102,12 +96,12 @@ const Search = () => {
         ListEmptyComponent={
           debouncedQuery.length >= 3 ? (
             <View style={styles.center}>
-              <Text style={styles.noResultsText}>No movies found.</Text>
+              <Text style={styles.noResultsText}>No shows found.</Text>
             </View>
           ) : (
             <View style={styles.center}>
               <Text style={styles.promptText}>
-                Start typing to search for movies.
+                Start typing to search for shows.
               </Text>
             </View>
           )
@@ -125,4 +119,4 @@ const Search = () => {
   );
 };
 
-export default Search;
+export default ShowSearch;

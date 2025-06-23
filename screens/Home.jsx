@@ -87,6 +87,26 @@ const Home = ({ navigation }) => {
             styles={styles}
           />
         </View>
+        <View>
+          <Text
+            style={{
+              color: "white",
+              fontSize: 22,
+              marginHorizontal: 6,
+              marginBottom: 6,
+              marginTop: 10,
+            }}
+          >
+            TV Shows (alpha version)
+          </Text>
+        </View>
+        <View style={styles.quickActionsRow}>
+          <AnimatedGradientCard
+            onPress={() => navigation.navigate("ShowSearch")}
+            title="Search TV Shows"
+            styles={styles}
+          />
+        </View>
       </View>
 
       {/* Fifth Part: Section Header */}

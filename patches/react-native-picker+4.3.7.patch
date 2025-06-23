@@ -1,0 +1,46 @@
+diff --git a/node_modules/react-native-picker/android/build.gradle b/node_modules/react-native-picker/android/build.gradle
+index 40f4f26..7e9654d 100644
+--- a/node_modules/react-native-picker/android/build.gradle
++++ b/node_modules/react-native-picker/android/build.gradle
+@@ -1,17 +1,14 @@
+ apply plugin: 'com.android.library'
+ 
+ android {
+-    compileSdkVersion 27
+-    buildToolsVersion "23.0.1"
++    compileSdkVersion 30
+ 
+     defaultConfig {
+         minSdkVersion 16
+-        targetSdkVersion 27
++        targetSdkVersion 30
+         versionCode 1
+         versionName "1.0"
+-
+         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+-
+     }
+     buildTypes {
+         release {
+@@ -22,6 +19,6 @@ android {
+ }
+ 
+ dependencies {
+-    compile fileTree(include: ['*.jar'], dir: 'libs')
+-    compile 'com.facebook.react:react-native:+'
++    implementation fileTree(dir: "libs", include: ["*.jar"])
++    implementation 'com.facebook.react:react-native:+'
+ }
+diff --git a/node_modules/react-native-picker/android/src/main/java/com/beefe/picker/PickerViewModule.java b/node_modules/react-native-picker/android/src/main/java/com/beefe/picker/PickerViewModule.java
+index 813a0bd..73ad137 100644
+--- a/node_modules/react-native-picker/android/src/main/java/com/beefe/picker/PickerViewModule.java
++++ b/node_modules/react-native-picker/android/src/main/java/com/beefe/picker/PickerViewModule.java
+@@ -6,7 +6,7 @@ import android.app.Dialog;
+ import android.graphics.Color;
+ import android.graphics.PixelFormat;
+ import android.graphics.Typeface;
+-import android.support.annotation.Nullable;
++import androidx.annotation.Nullable;
+ import android.text.TextUtils;
+ import android.view.Gravity;
+ import android.view.View;

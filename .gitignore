@@ -4,8 +4,7 @@
 node_modules/
 
 # firebase
-firebase.js
-
+.env
 # Expo
 .expo/
 dist/

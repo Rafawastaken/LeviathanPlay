@@ -7,6 +7,9 @@ import MovieDetails from "../screens/MovieDetails";
 import MoviesByGenre from "../screens/MoviesByGenre";
 import RecentlyAdded from "../screens/RecentlyAdded";
 import TermsOfService from "../screens/TermsOfService";
+import ShowSearch from "../screens/ShowSearch";
+import ShowDetails from "../screens/ShowDetail";
+import EpisodePlayer from "../screens/EpisodePlayer";
 
 const Stack = createStackNavigator();
 
@@ -49,6 +52,23 @@ const StackNavigator = () => {
         name="TermsOfService"
         component={TermsOfService}
         options={{ title: "Terms of Service" }}
+      />
+
+      {/* Tv Shows */}
+      <Stack.Screen
+        name="ShowSearch"
+        component={ShowSearch}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="ShowDetails"
+        component={ShowDetails}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="EpisodePlayer"
+        component={EpisodePlayer}
+        options={{ headerShown: false }}
       />
     </Stack.Navigator>
   );
